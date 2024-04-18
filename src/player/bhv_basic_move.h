@@ -36,9 +36,11 @@ public:
     Bhv_BasicMove()
       { }
 
+    bool readParameters( const std::string & parameter_dir );
     bool execute( rcsc::PlayerAgent * agent );
 
 private:
+    int value_;
     double getDashPower( const rcsc::PlayerAgent * agent );
 };
 

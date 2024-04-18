@@ -49,12 +49,80 @@
 
 #include "neck_offensive_intercept_neck.h"
 
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
+
 using namespace rcsc;
 
 /*-------------------------------------------------------------------*/
 /*!
 
  */
+
+bool
+Bhv_BasicMove::readParameters( const std::string & parameter_dir)
+{   
+    int value;
+    double p;
+
+    std::string line_buf;
+    char tmp_buf[9];
+
+    std::vector< double > tmp;
+    
+    std::string parameter_file = parameter_dir + "parameters.txt";
+
+    std::ifstream f( parameter_file.c_str() );
+
+    std::stringstream ss( line_buf );
+    std::string parameter_name;
+
+    std::cerr << __FILE__ << ":"
+              << "(readline_buf)"
+              <<"*** ["
+              << line_buf
+              <<" ]" << std::endl;
+
+    if ( ! f.is_open() )
+    {
+        std::cerr <<  __FILE__ << ":"
+                  << "(readParameters)"
+                  << " ***ERROR*** could not open the file ["
+                  << parameter_file << "]" << std::endl;
+        return false;
+    }
+
+    while ( std::getline( f, line_buf ))    
+    {
+        if( line_buf.empty() )
+        {
+            continue;
+        }
+
+        if ( line_buf[0] == 'p' )
+        {
+            if( std::sscanf( line_buf.data(),
+                             "%9 %d",
+                             tmp_buf, p) != 2 )
+            {
+                std::cerr << __FILE__ << ":"
+                          << "(readparameter)"
+                          << " ***ERROR*** could not read the line ["
+                          << line_buf << "]" << std::endl;
+                return false;
+            }
+
+            std::getline(ss, parameter_name, ',');
+            ss >> value_;
+
+            std::cout << line_buf << std::endl;    
+        }
+        return true; 
+    }       
+}
+
 bool
 Bhv_BasicMove::execute( PlayerAgent * agent )
 {
@@ -91,6 +159,40 @@ Bhv_BasicMove::execute( PlayerAgent * agent )
     }
 
     const Vector2D target_point = Strategy::i().getPosition( wm.self().unum() );
+
+    /*--------------------------------------------------------*/
+    //Gliders2d: pressing
+
+    int pressing = value_;
+    int pressing = 13;
+
+
+//    if ( role >= 6 && role <= 8 && wm.ball().pos().x > -30.0 && wm.self().pos().x < 10.0 )
+//        pressing = 7;
+
+
+//    if (fabs(wm.ball().pos().y) > 22.0 && wm.ball().pos().x < 0.0 && wm.ball().pos().x > -36.5 && (role == 4 || role == 5) )
+//        pressing = 23;
+
+
+//    if ( ! wm.existKickableTeammate()
+//         && ( self_min <= 3
+//              || ( self_min <= mate_min
+//                   && self_min < opp_min + pressing )
+//              )
+//         )
+//    {
+//        dlog.addText( Logger::TEAM,
+//                      __FILE__": intercept" );
+//        Body_Intercept().execute( agent );
+//        agent->setNeckAction( new Neck_OffensiveInterceptNeck() );
+
+
+//        return true;
+//    }
+
+
+
     const double dash_power = Strategy::get_normal_dash_power( wm );
 
     double dist_thr = wm.ball().distFromSelf() * 0.1;
