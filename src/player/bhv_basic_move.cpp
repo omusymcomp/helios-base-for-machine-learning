@@ -69,12 +69,11 @@ Bhv_BasicMove::readParameters( const std::string & parameter_dir)
 
     std::string line_buf;
     char tmp_buf[9];
-
-    std::vector< double > tmp;
     
     std::string parameter_file = parameter_dir + "parameters.txt";
 
     std::ifstream f( parameter_file.c_str() );
+
 
     std::stringstream ss( line_buf );
     std::string parameter_name;
