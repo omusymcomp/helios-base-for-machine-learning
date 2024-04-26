@@ -140,7 +140,7 @@ Strategy::instance()
 bool
 Strategy::init( CmdLineParser & cmd_parser )
 {
-    ParamMap param_map( "HELIOS_base options" );
+    ParamMap param_map( "ex_HELIOS_base options" );
 
     // std::string fconf;
     //param_map.add()

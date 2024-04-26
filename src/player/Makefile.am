@@ -109,6 +109,7 @@ sample_player_SOURCES = \
 	role_keepaway_keeper.cpp \
 	role_keepaway_taker.cpp \
 	keepaway_communication.cpp \
+	options.cpp \
 	sample_communication.cpp \
 	sample_field_evaluator.cpp \
 	sample_freeform_message_parser.cpp \
@@ -245,6 +246,7 @@ noinst_HEADERS = \
 	role_keepaway_taker.h \
 	communication.h \
 	keepaway_communication.h \
+	options.h \
 	sample_communication.h \
 	sample_field_evaluator.h \
 	sample_freeform_message_parser.h \

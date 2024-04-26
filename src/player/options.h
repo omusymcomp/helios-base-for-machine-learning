@@ -24,30 +24,51 @@
 
 /////////////////////////////////////////////////////////////////////
 
-#ifndef BHV_BASIC_MOVE_H
-#define BHV_BASIC_MOVE_H
-
-#include <rcsc/geom/vector_2d.h>
-#include <rcsc/player/soccer_action.h>
+#ifndef BASE_OPTIONS_H
+#define BASE_OPTIONS_H
 
 #include <string>
-#include <unordered_map>
 
-class Bhv_BasicMove
-    : public rcsc::SoccerBehavior {
+namespace rcsc {
+class CmdLineParser;
+}
+
+/*!
+  \class Options
+  \brief singleton command line option holder
+*/
+class Options {
 public:
-    typedef std::unordered_map< std::string, double > ParamMap;
-
-    ParamMap M_param_map;
-public:
-    Bhv_BasicMove()
-      { }
-
-    bool readParameters();
-    bool execute( rcsc::PlayerAgent * agent );
 
 private:
-    double getDashPower( const rcsc::PlayerAgent * agent );
+
+    std::string M_parameter_dir; //!< the file path to write manual parameter files
+
+    Options(); // private for singleton
+
+    // not used
+    Options( const Options & );
+    const Options & operator=( const Options & );
+
+public:
+
+    static
+    Options & instance();
+
+    /*!
+      \brief singleton instance interface
+      \return const reference to local static instance
+    */
+    static
+    const Options & i()
+    {
+      return instance();
+    }
+
+    bool init( rcsc::CmdLineParser & cmd_parser );
+
+    const std::string & manualParameterDir() const { return M_parameter_dir; }
+
 };
 
 #endif
