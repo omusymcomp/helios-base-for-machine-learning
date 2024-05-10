@@ -24,21 +24,22 @@
 
 /////////////////////////////////////////////////////////////////////
 
-#ifndef BHV_BASIC_MOVE_H
-#define BHV_BASIC_MOVE_H
-
-#include <rcsc/player/soccer_action.h>
+#ifndef READ_PARAMERTERS_H
+#define READ_PARAMERTERS_H
 
 #include <string>
 #include <unordered_map>
 
-class Bhv_BasicMove
-    : public rcsc::SoccerBehavior {
-public:
-    Bhv_BasicMove()
-      { }
+class Read_Parameters{
+private:
+    std::unordered_map< std::string, double > M_param_map;
 
-    bool execute( rcsc::PlayerAgent * agent );
+public:
+    double get_param( const std::string & param_name );
+
+private:
+    bool read();
+
 };
 
 #endif

@@ -33,6 +33,8 @@
 #include "strategy.h"
 
 #include "bhv_basic_tackle.h"
+#include "neck_offensive_intercept_neck.h"
+#include "read_parameters.h"
 
 #include "basic_actions/basic_actions.h"
 #include "basic_actions/body_go_to_point.h"
@@ -75,22 +77,51 @@ Bhv_BasicMove::execute( PlayerAgent * agent )
     const int mate_min = wm.interceptTable().teammateStep();
     const int opp_min = wm.interceptTable().opponentStep();
 
+    const Vector2D target_point = Strategy::i().getPosition( wm.self().unum() );
+
+        /*--------------------------------------------------------*/
+    //Gliders2d: role
+    int role = Strategy::i().roleNumber( wm.self().unum() );
+
+    //Gliders2d: pressing
+    double pressing = 0;
+    pressing = Read_Parameters().get_param( "pressing" );
+    if ( pressing == 0 )
+        pressing = 12;
+
+    if ( role >= 6 && role <= 8 && wm.ball().pos().x > -30.0 && wm.self().pos().x < 10.0 )
+    {
+        pressing = Read_Parameters().get_param( "pressing_mid" );
+        if ( pressing == 0 )
+            pressing = 7;
+    }
+
+    if (fabs(wm.ball().pos().y) > 22.0 && wm.ball().pos().x < 0.0 && wm.ball().pos().x > -36.5 && (role == 4 || role == 5) )
+    {
+        pressing = Read_Parameters().get_param( "pressing_sideback" );
+        if ( pressing == 0 )
+            pressing = 23;
+    }
+
     if ( ! wm.kickableTeammate()
-         && ( self_min <= 3
-              || ( self_min <= mate_min
-                   && self_min < opp_min + 3 )
-              )
-         )
+            && ( self_min <= 3
+                || ( self_min <= mate_min
+                    && self_min < opp_min + pressing )
+                )
+            )
     {
         dlog.addText( Logger::TEAM,
-                      __FILE__": intercept" );
+                        __FILE__": intercept" );
+        dlog.addText( Logger::TEAM,
+                        __FILE__": Pressing=%lf",
+                        pressing);
+        agent->debugClient().addMessage( "Pressing%lf", pressing );
         Body_Intercept().execute( agent );
         agent->setNeckAction( new Neck_OffensiveInterceptNeck() );
 
         return true;
     }
 
-    const Vector2D target_point = Strategy::i().getPosition( wm.self().unum() );
     const double dash_power = Strategy::get_normal_dash_power( wm );
 
     double dist_thr = wm.ball().distFromSelf() * 0.1;

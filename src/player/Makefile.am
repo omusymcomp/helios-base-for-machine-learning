@@ -93,10 +93,12 @@ sample_player_SOURCES = \
 	neck_default_intercept_neck.cpp \
 	neck_goalie_turn_neck.cpp \
 	neck_offensive_intercept_neck.cpp \
+	options.cpp \
 	view_tactical.cpp \
 	intention_receive.cpp \
 	intercept_evaluator_sample.cpp \
 	soccer_role.cpp \
+	read_parameters.cpp \
 	role_center_back.cpp \
 	role_center_forward.cpp \
 	role_defensive_half.cpp \
@@ -232,6 +234,7 @@ noinst_HEADERS = \
 	intention_receive.h \
 	intercept_evaluator_sample.h \
 	soccer_role.h \
+	read_parameters.h \
 	role_center_back.h \
 	role_center_forward.h \
 	role_defensive_half.h \
@@ -245,6 +248,7 @@ noinst_HEADERS = \
 	role_keepaway_taker.h \
 	communication.h \
 	keepaway_communication.h \
+	options.h \
 	sample_communication.h \
 	sample_field_evaluator.h \
 	sample_freeform_message_parser.h \
