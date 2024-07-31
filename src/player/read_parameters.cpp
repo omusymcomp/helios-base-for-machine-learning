@@ -43,7 +43,7 @@ Read_Parameters::get_param( const std::string & param_name )
 {
     if ( ! read() )
     {
-        return 0;
+        return std::numeric_limits<double>::max();;
     }
 
     double param = 0;
@@ -61,7 +61,7 @@ Read_Parameters::get_param( const std::string & param_name )
                     << ": (get_param)"
                     << " ***ERROR*** could not get manual parameter"
                     << std::endl;
-        return 0;
+        return std::numeric_limits<double>::max();;
     }        
 
     return param;

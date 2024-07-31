@@ -89,6 +89,7 @@ sample_player_SOURCES = \
 	bhv_goalie_basic_move.cpp \
 	bhv_goalie_chase_ball.cpp \
 	bhv_goalie_free_kick.cpp \
+	bhv_marlik_block.cpp \
 	bhv_penalty_kick.cpp \
 	neck_default_intercept_neck.cpp \
 	neck_goalie_turn_neck.cpp \
@@ -226,6 +227,7 @@ noinst_HEADERS = \
 	bhv_goalie_basic_move.h \
 	bhv_goalie_chase_ball.h \
 	bhv_goalie_free_kick.h \
+	bhv_marlik_block.h \
 	bhv_penalty_kick.h \
 	neck_default_intercept_neck.h \
 	neck_goalie_turn_neck.h \
