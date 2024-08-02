@@ -43,7 +43,7 @@ Read_Parameters::get_param( const std::string & param_name )
 {
     if ( ! read() )
     {
-        return std::numeric_limits<double>::max();;
+        return std::numeric_limits<double>::max();
     }
 
     double param = 0;
@@ -54,6 +54,14 @@ Read_Parameters::get_param( const std::string & param_name )
         {
             param = M_param_map[param_name];
         }
+        else
+        {
+            // std::cerr << __FILE__ 
+            //         << ": (get_param)"
+            //         << " ***ERROR*** could not find manual parameter"
+            //         << std::endl;
+            return std::numeric_limits<double>::max();
+        }
     }
     else
     {
@@ -61,7 +69,7 @@ Read_Parameters::get_param( const std::string & param_name )
                     << ": (get_param)"
                     << " ***ERROR*** could not get manual parameter"
                     << std::endl;
-        return std::numeric_limits<double>::max();;
+        return std::numeric_limits<double>::max();
     }        
 
     return param;
