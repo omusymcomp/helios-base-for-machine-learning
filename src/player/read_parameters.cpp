@@ -118,7 +118,7 @@ Read_Parameters::read()
         if ( ! std::isdigit(static_cast<unsigned char>(line_buf[0])) )
         {
             if( std::sscanf( line_buf.data(),
-                             "%19s %lf",
+                             "%22s %lf",
                              parameter_name, &value) != 2 )
             {
                 // std::cerr << __FILE__ << ":"
