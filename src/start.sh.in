@@ -23,7 +23,7 @@ DIR=`dirname $0`
 
 player="${DIR}/sample_player"
 coach="${DIR}/sample_coach"
-teamname="HELIOS_base"
+teamname="ex_HELIOS_base"
 host="localhost"
 port=6000
 coach_port=""
@@ -52,6 +52,8 @@ offline_logging=""
 offline_mode=""
 fullstateopt=""
 
+parameter_dir="{DIR}/player/data/"
+
 usage()
 {
   (echo "Usage: $0 [options]"
@@ -65,6 +67,7 @@ usage()
    echo "  -u, --unum UNUM              specifies the uniform number of players"
    echo "  -C, --without-coach          specifies not to run the coach"
    echo "  -f, --formation DIR          specifies the formation directory"
+   echo "  --parameter-dir DIR          specifies the manual parameter directory"
    echo "  --team-graphic FILE          specifies the team graphic xpm file"
    echo "  --offline-logging            writes offline client log (default: off)"
    echo "  --offline-client-mode        starts as an offline client (default: off)"
@@ -155,6 +158,15 @@ do
         exit 1
       fi
       config_dir="${2}"
+      shift 1
+      ;;
+    
+    --parameter-dir)
+      if [ $# -lt 2 ]; then
+        usage
+        exit 1
+      fi
+      parameter_dir="${2}"
       shift 1
       ;;
 
@@ -312,6 +324,7 @@ opt="${opt} --debug_server_host ${debug_server_host}"
 opt="${opt} --debug_server_port ${debug_server_port}"
 opt="${opt} ${offline_logging}"
 opt="${opt} ${debugopt}"
+opt="${opt} --parameter-dir ${parameter_dir}"
 
 ping -c 1 $host
 

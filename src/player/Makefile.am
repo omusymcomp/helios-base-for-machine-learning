@@ -89,14 +89,17 @@ sample_player_SOURCES = \
 	bhv_goalie_basic_move.cpp \
 	bhv_goalie_chase_ball.cpp \
 	bhv_goalie_free_kick.cpp \
+	bhv_marlik_block.cpp \
 	bhv_penalty_kick.cpp \
 	neck_default_intercept_neck.cpp \
 	neck_goalie_turn_neck.cpp \
 	neck_offensive_intercept_neck.cpp \
+	options.cpp \
 	view_tactical.cpp \
 	intention_receive.cpp \
 	intercept_evaluator_sample.cpp \
 	soccer_role.cpp \
+	read_parameters.cpp \
 	role_center_back.cpp \
 	role_center_forward.cpp \
 	role_defensive_half.cpp \
@@ -224,6 +227,7 @@ noinst_HEADERS = \
 	bhv_goalie_basic_move.h \
 	bhv_goalie_chase_ball.h \
 	bhv_goalie_free_kick.h \
+	bhv_marlik_block.h \
 	bhv_penalty_kick.h \
 	neck_default_intercept_neck.h \
 	neck_goalie_turn_neck.h \
@@ -232,6 +236,7 @@ noinst_HEADERS = \
 	intention_receive.h \
 	intercept_evaluator_sample.h \
 	soccer_role.h \
+	read_parameters.h \
 	role_center_back.h \
 	role_center_forward.h \
 	role_defensive_half.h \
@@ -245,6 +250,7 @@ noinst_HEADERS = \
 	role_keepaway_taker.h \
 	communication.h \
 	keepaway_communication.h \
+	options.h \
 	sample_communication.h \
 	sample_field_evaluator.h \
 	sample_freeform_message_parser.h \

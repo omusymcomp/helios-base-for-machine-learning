@@ -24,21 +24,38 @@
 
 /////////////////////////////////////////////////////////////////////
 
-#ifndef BHV_BASIC_MOVE_H
-#define BHV_BASIC_MOVE_H
+/*
 
+   Z----------------------------------Z
+   |    Fragments of the                              |
+   |    file Created By: Amir Tavafi  |
+   |                                  |
+   |    Date Created:    2009/11/30,  |
+   |                     1388/08/09   |
+   |                                  |
+   Z----------------------------------Z
+
+*/
+
+#ifndef BHV_MARLIK_BLOCK_H
+#define BHV_MARLIK_BLOCK_H
+
+#include <rcsc/geom/vector_2d.h>
 #include <rcsc/player/soccer_action.h>
 
-#include <string>
-#include <unordered_map>
-
-class Bhv_BasicMove
+class Bhv_MarlikBlock
     : public rcsc::SoccerBehavior {
+private:
+
 public:
-    Bhv_BasicMove()
-      { }
+    Bhv_MarlikBlock()
+    { }
 
     bool execute( rcsc::PlayerAgent * agent );
-};
 
+private:
+    bool doInterceptBall( rcsc::PlayerAgent * agent );
+    bool doBlockMove( rcsc::PlayerAgent * agent );
+    rcsc::Vector2D getBlockPoint( rcsc::PlayerAgent * agent );
+};
 #endif

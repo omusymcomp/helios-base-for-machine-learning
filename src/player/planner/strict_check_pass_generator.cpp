@@ -37,6 +37,7 @@
 
 #include "pass.h"
 #include "field_analyzer.h"
+#include "read_parameters.h"
 
 #include <rcsc/player/world_model.h>
 #include <rcsc/player/intercept_table.h>
@@ -1258,9 +1259,23 @@ StrictCheckPassGenerator::createPassCommon( const WorldModel & wm,
                                                 &opponent );
 
         bool failed = false;
+
+//EP: risk
+        int risk = 0;
+        if ( wm.ball().pos().x < wm.offsideLineX()
+            && receive_point.x > wm.offsideLineX() + 3.0
+            && wm.offsideLineX() - receiver.player_->pos().x < 5.0 )
+        {
+            risk = Read_Parameters().get_param( "pass_risk" );
+            if ( risk == std::numeric_limits<double>::max() )
+                risk = 2;
+        }
+
+        risk = round(risk);
+
         if ( M_pass_type == 'T' )
         {
-            if ( o_step <= step )
+            if ( o_step + risk <= step )
             {
 #ifdef DEBUG_THROUGH_PASS
                  dlog.addText( Logger::PASS,
@@ -1290,7 +1305,7 @@ StrictCheckPassGenerator::createPassCommon( const WorldModel & wm,
         }
         else
         {
-            if ( o_step <= step + ( kick_count - 1 ) )
+            if ( o_step + risk <= step + ( kick_count - 1 ) )
             {
                 failed = true;
             }

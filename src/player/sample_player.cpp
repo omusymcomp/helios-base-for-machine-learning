@@ -54,6 +54,8 @@
 
 #include "intention_receive.h"
 
+#include "options.h"
+
 #include "basic_actions/basic_actions.h"
 #include "basic_actions/bhv_emergency.h"
 #include "basic_actions/body_go_to_point.h"
@@ -165,6 +167,7 @@ SamplePlayer::initImpl( CmdLineParser & cmd_parser )
     bool result = PlayerAgent::initImpl( cmd_parser );
 
     // read additional options
+    result &= Options::instance().init( cmd_parser );
     result &= Strategy::instance().init( cmd_parser );
 
     rcsc::ParamMap my_params( "Additional options" );
