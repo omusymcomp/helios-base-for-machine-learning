@@ -1,19 +1,22 @@
-# HELIOS Base
-[![GitHub license](https://img.shields.io/github/license/helios-base/helios-base)](https://github.com/helios-base/helios-base/blob/master/LISENCE)
-
-helios-base is a sample team for the RoboCup Soccer 2D Simulator.
-All programs can work with rcssserver-16.
+# HELIOS Base for Machine Learing
+helios-base-for-machine-learing is a sample team for the RoboCup Soccer 2D Simulator, and can be tuned parameter.
+All programs can work with rcssserver-19.
 
 - The RoboCup Soccer Simulator: http://github.com/rcsoccersim/
 - RoboCup Official Homepage: http://www.robocup.org/
 
 ## Quick Start
 
-The latest helios-base depends on the following libraries:
+It depends on the following libraries:
  - Boost 1.38 or later https://www.boost.org/
- - The latest librcsc https://github.com/helios-base/librcsc
+ - The librcsc https://github.com/helios-base/librcsc 
+ 
+need to change branch of librcsc
+```
+git checkout 348f41e28c7963c928da85ac1c57da6859cc7983
+```
 
-In the case of Ubuntu 16.04 or later, execute the following commands for installing a basic development environment:
+In the case of Ubuntu 22.04 or later, execute the following commands for installing a basic development environment:
 ```
 sudo apt update
 sudo apt install build-essential libboost-all-dev
@@ -44,6 +47,18 @@ You may also need to set the environment variable `LD_LIBRARY_PATH`.
 
 See `./configure --help` for others options.
 
+## Parameter Tuning
+You have to decide parameters to be tuned and call a function, which reads a file where parameter names and values are wrriten.
+- The function is wrriten in read_parameter.h/cpp. (Read_Parameters::get_param)
+- In inputting parameters, the function is called, as below.
+
+```
+// bhv_basic_move.cpp
+double pressing = 0;
+pressing = Read_Parameters().get_param( "pressing" );
+if ( pressing == std::numeric_limits<double>::max() )
+    pressing = 13;
+```
 
 ## References
 
