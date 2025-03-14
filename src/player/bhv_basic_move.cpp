@@ -152,7 +152,7 @@ Bhv_BasicMove::execute( PlayerAgent * agent )
     double pressing = 0;
     pressing = Read_Parameters().get_param( "pressing" );
     if ( pressing == std::numeric_limits<double>::max() )
-        pressing = 12;
+        pressing = 13;
 
     if ( role_name == "MidFielder"
          && wm.ball().pos().x > -30.0 
